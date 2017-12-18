@@ -10,9 +10,8 @@ AT&T Residential Gateway Bypass - True bridge mode!
 
 ## Instructions
 
-- Copy `eap_proxy.sh` to `/config/scripts/post-config.d/eap_proxy.sh`
-- Copy `eap_proxy.py` to `/config/scripts/eap_proxy.py`
-- Adjust the settings in `eap_proxy.sh` as appropriate per the usage instructions below.
+- Copy `vyatta-eap-proxy.deb` to `~`
+- Install with `sudo dpkg -i ~/vyatta-eap-proxy.deb`
 
 ## EdgeRouter Sample Configuration
 
@@ -43,6 +42,8 @@ set service nat rule 5010 description 'masquerade for WAN'
 set service nat rule 5010 outbound-interface eth0.0
 set service nat rule 5010 protocol all
 set service nat rule 5010 type masquerade
+set service eap-proxy wan-interface eth0
+set service eap-proxy router-interface eth2
 set system offload ipv4 vlan enable
 ```
 
@@ -84,50 +85,10 @@ It may be possible to configure the tun0 interface via DHCPv6; I haven't tried.
 
 Good luck. It works for me on my EdgeRouter Lite running EdgeOS v1.9.1.1.
 
-## Usage
+## Build Instructions
+
+To build the debian package, run the following on a host system:
 
 ```
-usage: eap_proxy [-h] [--ping-gateway] [--ignore-when-wan-up] [--ignore-start]
-                 [--ignore-logoff] [--restart-dhcp] [--set-mac] [--daemon]
-                 [--pidfile PIDFILE] [--syslog] [--promiscuous] [--debug]
-                 [--debug-packets]
-                 IF_WAN IF_ROUTER
-
-positional arguments:
-  IF_WAN                interface of the AT&T ONT/WAN
-  IF_ROUTER             interface of the AT&T router
-
-optional arguments:
-  -h, --help            show this help message and exit
-
-checking whether WAN is up:
-  --ping-gateway        normally the WAN is considered up if IF_WAN.0 has an
-                        IP address; this option additionally requires that
-                        there is a default route gateway that responds to a
-                        ping
-
-ignoring router packets:
-  --ignore-when-wan-up  ignore router packets when WAN is up (see --ping-
-                        gateway)
-  --ignore-start        always ignore EAPOL-Start from router
-  --ignore-logoff       always ignore EAPOL-Logoff from router
-
-configuring IF_WAN.0 VLAN:
-  --restart-dhcp        check whether WAN is up after receiving EAP-Success on
-                        IF_WAN (see --ping-gateway); if not, restart dhclient
-                        on IF_WAN.0
-  --set-mac             set IF_WAN.0's MAC (ether) address to router's MAC
-                        address
-
-daemonization:
-  --daemon              become a daemon; implies --syslog
-  --pidfile PIDFILE     record pid to PIDFILE
-  --syslog              log to syslog instead of stderr
-
-debugging:
-  --promiscuous         place interfaces into promiscuous mode instead of
-                        multicast
-  --debug               enable debug-level logging
-  --debug-packets       print packets in hex format to assist with debugging;
-                        implies --debug
+debuild -us -uc -rsudo
 ```
