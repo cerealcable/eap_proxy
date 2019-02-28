@@ -10,9 +10,8 @@ AT&T Residential Gateway Bypass - True bridge mode!
 
 ## Instructions (EdgeRouter)
 
-- Copy `eap_proxy.sh` to `/config/scripts/post-config.d/eap_proxy.sh`
-- Copy `eap_proxy.py` to `/config/scripts/eap_proxy.py`
-- Adjust the settings in `eap_proxy.sh` as appropriate per the usage instructions below.
+- Copy `vyatta-eap-proxy.deb` to `~`
+- Install with `sudo dpkg -i ~/vyatta-eap-proxy.deb`
 
 ## Instructions (USG)
 
@@ -47,6 +46,8 @@ set service nat rule 5010 description 'masquerade for WAN'
 set service nat rule 5010 outbound-interface eth0.0
 set service nat rule 5010 protocol all
 set service nat rule 5010 type masquerade
+set service eap-proxy wan-interface eth0
+set service eap-proxy router-interface eth2
 set system offload ipv4 vlan enable
 ```
 
@@ -88,8 +89,15 @@ For configuring IPv6 in areas that are on native dual-stack, please see the disc
 
 Good luck. This proxy continues to work well for me. I originally developed it for use on an EdgeRouter Lite running EdgeOS v1.9.1.1. As of Sep 2018, I'm using it on an EdgeRouter 4 running EdgeOS v1.10.5. I know that it has also been used successfully on the ER-X and USG.
 
-## Usage
+## Build Instructions
 
+To build the debian package, run the following on a host system:
+
+```
+debuild -us -uc -rsudo
+```
+
+## eap_proxy Command usage
 ```
 usage: eap_proxy [-h] [--ping-gateway] [--ping-ip PING_IP]
                  [--ignore-when-wan-up] [--ignore-start] [--ignore-logoff]
