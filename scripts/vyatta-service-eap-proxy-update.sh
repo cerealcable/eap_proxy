@@ -15,7 +15,7 @@ DAEMON_OPTIONS=(--daemon --pidfile "$PIDFILE" --syslog)
 
 if [[ "$COMMIT_ACTION" != "DELETE" ]]; then
     if_wan=$(cli-shell-api returnValue service eap-proxy wan-interface)
-    if_router=$(cli-shell-api returnValue service eap-proxy router-interface)
+    if_rg=$(cli-shell-api returnValue service eap-proxy rg-interface)
 
     options=()
     for option in "${CONFIG_OPTIONS[@]}"; do
@@ -24,5 +24,5 @@ if [[ "$COMMIT_ACTION" != "DELETE" ]]; then
         fi
     done
     /sbin/start-stop-daemon --start --pidfile "$PIDFILE" --exec "$BIN_PATH" -- \
-        "$if_wan" "$if_router" "${options[@]}" "${DAEMON_OPTIONS[@]}"
+        "$if_wan" "$if_rg" "${options[@]}" "${DAEMON_OPTIONS[@]}"
 fi

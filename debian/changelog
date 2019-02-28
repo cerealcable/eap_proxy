@@ -1,3 +1,9 @@
+vyatta-eap-proxy (0.3.0) unstable; urgency=low
+
+  * Renamed eap-proxy router-interface to rg-interface
+
+ -- Morgan Humes <morgan@lanaddict.com>  Wed, 28 Feb 2019 00:13:30 -0600
+
 vyatta-eap-proxy (0.2.0) unstable; urgency=low
 
   * Merge to master
