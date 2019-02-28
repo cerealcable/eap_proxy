@@ -1,0 +1,9 @@
+type: txt
+help: Destination interface name
+allowed: /usr/sbin/ubnt-ifctl list-non-switch-intfs all
+
+syntax:expression: exec \
+    "if [ ! -d /sys/class/net/$VAR(@) ]; then \
+        echo \"interface $VAR(@): does not exist\";
+        exit 1; \
+    fi"

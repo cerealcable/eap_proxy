@@ -1,3 +1,11 @@
+vyatta-eap-proxy (0.4.0) unstable; urgency=low
+
+  * Validate interface references
+  * Rename wan-interface and rg-interface to src-interface and dest-interface
+    respectively
+
+ -- Morgan Humes <morgan@lanaddict.com>  Wed, 28 Feb 2019 12:47:30 -0600
+
 vyatta-eap-proxy (0.3.1) unstable; urgency=low
 
   * `show eap-proxy status` command

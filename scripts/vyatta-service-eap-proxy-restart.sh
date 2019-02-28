@@ -14,8 +14,8 @@ CONFIG_OPTIONS=(\
     "set-mac" \
 )
 DAEMON_OPTIONS=(--daemon --pidfile "$PIDFILE" --syslog)
-IF_WAN=$(cli-shell-api returnValue service eap-proxy wan-interface)
-IF_RG=$(cli-shell-api returnValue service eap-proxy rg-interface)
+IF_SRC=$(cli-shell-api returnValue service eap-proxy src-interface)
+IF_DEST=$(cli-shell-api returnValue service eap-proxy dest-interface)
 OPTIONS=()
 for option in "${CONFIG_OPTIONS[@]}"; do
     if [[ "$(cli-shell-api returnValue service eap-proxy "$option")" == "enable" ]]; then
@@ -25,4 +25,4 @@ done
 
 /sbin/start-stop-daemon --stop --retry 30 --pidfile "$PIDFILE" --oknodo --quiet
 /sbin/start-stop-daemon --start --pidfile "$PIDFILE" --exec "$BIN_PATH" -- \
-    "$IF_WAN" "$IF_RG" "${OPTIONS[@]}" "${DAEMON_OPTIONS[@]}"
+    "$IF_SRC" "$IF_DEST" "${OPTIONS[@]}" "${DAEMON_OPTIONS[@]}"

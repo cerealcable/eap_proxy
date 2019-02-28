@@ -1,3 +1,0 @@
-type: txt
-help: Interface name of the AT&T RG
-default: "eth2"

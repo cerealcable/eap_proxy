@@ -14,8 +14,8 @@ DAEMON_OPTIONS=(--daemon --pidfile "$PIDFILE" --syslog)
 /sbin/start-stop-daemon --stop --retry 30 --pidfile "$PIDFILE" --oknodo --quiet
 
 if [[ "$COMMIT_ACTION" != "DELETE" ]]; then
-    if_wan=$(cli-shell-api returnValue service eap-proxy wan-interface)
-    if_rg=$(cli-shell-api returnValue service eap-proxy rg-interface)
+    if_src=$(cli-shell-api returnValue service eap-proxy src-interface)
+    if_dest=$(cli-shell-api returnValue service eap-proxy dest-interface)
 
     options=()
     for option in "${CONFIG_OPTIONS[@]}"; do
@@ -24,5 +24,5 @@ if [[ "$COMMIT_ACTION" != "DELETE" ]]; then
         fi
     done
     /sbin/start-stop-daemon --start --pidfile "$PIDFILE" --exec "$BIN_PATH" -- \
-        "$if_wan" "$if_rg" "${options[@]}" "${DAEMON_OPTIONS[@]}"
+        "$if_src" "$if_dest" "${options[@]}" "${DAEMON_OPTIONS[@]}"
 fi

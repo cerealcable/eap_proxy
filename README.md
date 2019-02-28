@@ -46,8 +46,8 @@ set service nat rule 5010 description 'masquerade for WAN'
 set service nat rule 5010 outbound-interface eth0.0
 set service nat rule 5010 protocol all
 set service nat rule 5010 type masquerade
-set service eap-proxy wan-interface eth0
-set service eap-proxy rg-interface eth2
+set service eap-proxy src-interface eth0
+set service eap-proxy dest-interface eth2
 set system offload ipv4 vlan enable
 ```
 
