@@ -1,0 +1,8 @@
+help: Restart EAP Proxy
+
+run: if cli-shell-api existsActive service eap-proxy; then
+       sudo /opt/vyatta/sbin/vyatta-service-eap-proxy-restart.sh
+       echo EAP Proxy restarted, now running with pid $(cat /var/run/eap_proxy.pid)
+     else
+       echo EAP Proxy is not configured
+     fi

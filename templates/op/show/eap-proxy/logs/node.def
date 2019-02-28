@@ -1,0 +1,7 @@
+help: Show eap-proxy status
+
+run: if cli-shell-api existsActive service eap-proxy; then
+       grep eap_proxy /var/log/messages
+     else
+       echo EAP Proxy  is not configured
+     fi

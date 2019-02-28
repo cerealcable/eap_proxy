@@ -9,6 +9,7 @@ vsbindir = $(vprefix)/sbin
 sbin_SCRIPTS =
 sbin_SCRIPTS += scripts/eap_proxy.py
 sbin_SCRIPTS += scripts/vyatta-service-eap-proxy-update.sh
+sbin_SCRIPTS += scripts/vyatta-service-eap-proxy-restart.sh
 
 bin_sudo_users_SCRIPTS =
 
@@ -19,4 +20,5 @@ cpiop = find  . ! -regex '\(.*~\|.*\.bak\|.*\.swp\|.*\#.*\#\)' -print0 | \
 
 install-exec-hook:
 	mkdir -p $(DESTDIR)$(cfgdir)
-	cd templates-cfg; $(cpiop) $(DESTDIR)$(cfgdir)
+	cd templates/cfg; $(cpiop) $(DESTDIR)$(cfgdir)
+	cd templates/op; $(cpiop) $(DESTDIR)$(opdir)
