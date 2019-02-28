@@ -1,3 +1,11 @@
+vyatta-eap-proxy (0.2.0) unstable; urgency=low
+
+  * Merge to master
+  * Ability to build in docker
+
+ -- Morgan Humes <morgan@lanaddict.com>  Wed, 27 Feb 2019 23:41:30 -0600
+
+
 vyatta-eap-proxy (0.1.0) unstable; urgency=low
 
   * Initial release.
