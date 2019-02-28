@@ -1,0 +1,9 @@
+help: Capture EAP Proxy packets on configured destination interface
+run: if cli-shell-api existsActive service eap-proxy; then
+       eval $(echo $(/bin/cli-shell-api getSessionEnv $PPID))
+       cli-shell-api setupSession
+       IF_DEST=$(cli-shell-api returnValue service eap-proxy dest-interface)
+       sudo /opt/vyatta/sbin/vyatta-debug-eap-proxy-tcpdump.sh ${IF_DEST}
+     else
+       echo EAP Proxy is not configured
+     fi

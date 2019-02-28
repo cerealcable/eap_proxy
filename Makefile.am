@@ -10,6 +10,7 @@ sbin_SCRIPTS =
 sbin_SCRIPTS += scripts/eap_proxy.py
 sbin_SCRIPTS += scripts/vyatta-service-eap-proxy-update.sh
 sbin_SCRIPTS += scripts/vyatta-service-eap-proxy-restart.sh
+sbin_SCRIPTS += scripts/vyatta-debug-eap-proxy-tcpdump.sh
 
 bin_sudo_users_SCRIPTS =
 

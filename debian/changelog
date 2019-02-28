@@ -1,3 +1,9 @@
+vyatta-eap-proxy (0.4.1) unstable; urgency=low
+
+  * `debug eap-proxy packets` command
+
+ -- Morgan Humes <morgan@lanaddict.com>  Wed, 28 Feb 2019 13:26:30 -0600
+
 vyatta-eap-proxy (0.4.0) unstable; urgency=low
 
   * Validate interface references
