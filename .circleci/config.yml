@@ -13,8 +13,14 @@ jobs:
           name: Install dependencies
           command: |
             apt-get update
-            apt-get install -y devscripts build-essential cpio rsync
+            apt-get install -y devscripts build-essential cpio rsync python-pip
             cp /src/docker/dpkg-deb-wrapper /usr/local/bin/dpkg-deb
+            pip install -r requirements-test.txt
+
+      - run:
+          name: Test
+          command: |
+            behave tests/features/
 
       - run:
           name: Build

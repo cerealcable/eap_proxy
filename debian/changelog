@@ -1,3 +1,9 @@
+vyatta-eap-proxy (0.4.2) unstable; urgency=low
+
+  * Basic test suite
+
+ -- Morgan Humes <morgan@lanaddict.com>  Fri, 1 Mar 2019 03:22:30 -0600
+
 vyatta-eap-proxy (0.4.1) unstable; urgency=low
 
   * `debug eap-proxy packets` command
