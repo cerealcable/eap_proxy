@@ -23,7 +23,7 @@ jobs:
             behave tests/features/
 
       - run:
-          name: Build
+          name: Package
           command: |
             export PATH=/usr/local/bin:$PATH
             alias debuild="debuild --preserve-envvar PATH"
