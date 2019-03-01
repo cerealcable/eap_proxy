@@ -1,0 +1,29 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: debian:buster-slim
+
+    working_directory: /src
+
+    steps:
+      - checkout
+
+      - run:
+          name: Install dependencies
+          command: |
+            apt-get update
+            apt-get install -y devscripts build-essential cpio rsync
+            cp /src/docker/dpkg-deb-wrapper /usr/local/bin/dpkg-deb
+
+      - run:
+          name: Build
+          command: |
+            export PATH=/usr/local/bin:$PATH
+            alias debuild="debuild --preserve-envvar PATH"
+            mkdir -p /src/out
+            debuild -us -uc
+            cp ../vyatta-eap-proxy_* /src/out/
+
+      - store_artifacts:
+          path: /src/out
